@@ -11,6 +11,7 @@ namespace jogo
         //atributos 
         private string _name;
         private int _score;
+        private TimeSpan _gameTime;
 
 
         //metodos 
@@ -18,6 +19,7 @@ namespace jogo
         {
             Name = name;
             Score = 0;
+            _gameTime = TimeSpan.FromSeconds(0);
         }
 
         // Propriedades
@@ -38,8 +40,8 @@ namespace jogo
         {
             set
             {
-                if (value > 0)
-                    _score = value;
+                if (value >= 0)
+                    _score += value;
             }
             get
             {
@@ -47,10 +49,18 @@ namespace jogo
             }
         }
             
+        public TimeSpan GameTime
+        {
+            get { return _gameTime; }
+            set
+            {
+                _gameTime += value;
+            }
+        }
 
         public override string ToString()
         {
-            return "nome:" + Name + "\nPontuação: " + Score;
+            return "nome:" + Name + "\nPontuação: " + Score + $"\nTempo de Partida: {GameTime:hh\\:mm\\:ss}";
         }
     }
 }

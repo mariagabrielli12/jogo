@@ -38,6 +38,7 @@ namespace JogoDaMemória
             int[,] jogo = new int[4, 4];
 
             int[,] tela = new int[4, 4];
+            int acertos = 0;
 
             Console.WriteLine("Entre com o player 1:");
             string nomeP1 = Console.ReadLine();
@@ -73,39 +74,49 @@ namespace JogoDaMemória
 
 
 
-            int acertos = 0;
+           //sorteia o jogador
+            int jogador = gerador.Next(1, 3);
+            Progam.PrintMatrix(jogo);
+            Console.WriteLine();
             do
             {
+
+                // Chamar método de impressão
                 Progam.PrintMatrix(tela);
 
-                int jogador = gerador.Next(1,3);
+                Console.WriteLine("{0} É SUA VEZ!",
+                    jogador == 1 ? p1.Name : p2.Name);
+
+                DateTime begin = DateTime.Now;
+
 
                 int lin1, col1;
                 do
                 {
+                    do
+                    {
+                        //Pedir as posições do primeiro número
+                        Console.WriteLine("Escolha uma linha para jogar [1, 4]: ");
+                        lin1 = int.Parse(Console.ReadLine());
+                    } while (lin1 <= 0 || lin1 >= 5);
 
+                    do {
+                        Console.WriteLine("Escolha uma coluna para jogar [1, 4]: ");
+                        col1 = int.Parse(Console.ReadLine());
+                    } while(col1 <= 0 || col1 >= 5);
 
-                    // Chamar método de impressão
-                    Progam.PrintMatrix(tela);
-
-                    Console.WriteLine("{0} É SUA VEZ!",
-                        jogador == 1 ? p1.Name: p2.Name);
-
-
-
-                    //Pedir as posições do primeiro número
-                    Console.WriteLine("Escolha uma linha para jogar [1, 4]: ");
-                    lin1 = int.Parse(Console.ReadLine());
-
-                    Console.WriteLine("Escolha uma coluna para jogar [1, 4]: ");
-                    col1 = int.Parse(Console.ReadLine());
-
+                    //atribuir o valor da matriz do jogo na tela
                     lin1--;
                     col1--;
-                } while (lin1 < 0 || lin1 >= 4 || col1 >= 4 || col1 < 0);
+
+                    if (tela[lin1, lin1] != 0);
+                    Console.WriteLine("Erro: você já digitou essa posição");
+                } while (tela[lin1, lin1] != 0);
 
 
                 tela[lin1, col1] = jogo[lin1, col1];
+
+
 
                 Progam.PrintMatrix(tela);
 
@@ -113,18 +124,29 @@ namespace JogoDaMemória
 
                 do
                 {
+                    do
+                    {
 
-                    //Pedir as posições do segundo número
-                    Console.WriteLine("Escolha uma linha para jogar [1, 4]: ");
-                    lin2 = int.Parse(Console.ReadLine());
+                        //Pedir as posições do segundo número
+                        Console.WriteLine("Escolha uma linha para jogar [1, 4]: ");
+                        lin2 = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Escolha uma coluna para jogar [1, 4]: ");
-                    col2 = int.Parse(Console.ReadLine());
+                    } while (lin2 <= 0 || lin2 >= 5);
 
-                    lin2--;
-                    col2--;
+                    do { Console.WriteLine("Escolha uma coluna para jogar [1, 4]: ");
+                        col2 = int.Parse(Console.ReadLine());
 
-                } while (lin2 < 0 || lin2 >= 4 || col2 >= 4 || col2 < 0);
+                    }while(col2 <= 0 || col2 >= 5);
+
+                     lin2--;
+                      col2--;
+
+                    if (tela[lin2, col2] !=0);
+
+                    Console.WriteLine("Erro: Você já escolheu essa posição!");
+
+
+                } while (tela[lin2, col2] != 0);
 
                 tela[lin2, col2] = jogo[lin2, col2];
 
